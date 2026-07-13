@@ -12,6 +12,24 @@ public sealed record WinPeMountedImageAssetProvisioningOptions
     public WinPeArchitecture Architecture { get; init; } = WinPeArchitecture.X64;
     public string BootstrapScriptContent { get; init; } = string.Empty;
     public string CurlExecutableSourcePath { get; init; } = string.Empty;
+    public string PSBootstrapperSourceExecutablePath { get; init; } = string.Empty;
+
+    /// <summary>
+    /// Gets a value indicating whether the boot Unattend.xml includes a minimized, interactive
+    /// PowerShell troubleshooting console (debug mode). Off by default to prevent tampering.
+    /// </summary>
+    public bool IncludeTroubleshootingConsole { get; init; }
+
+    /// <summary>
+    /// Gets a value indicating whether the WinPE firewall is enabled via Unattend.xml. On by default.
+    /// </summary>
+    public bool EnableFirewall { get; init; } = true;
+
+    /// <summary>
+    /// Gets source folders whose contents are copied into a relative destination inside the boot image
+    /// (the destination is relative to the image root).
+    /// </summary>
+    public IReadOnlyList<WinPeAdditionalRootFolder> AdditionalRootFolders { get; init; } = [];
     public string SevenZipSourceDirectoryPath { get; init; } = string.Empty;
     public string IanaWindowsTimeZoneMapJson { get; init; } = string.Empty;
     public string FoundryConnectConfigurationJson { get; init; } = string.Empty;
